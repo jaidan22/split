@@ -28,8 +28,8 @@ const addExpense = async (req, res) => {
       borrowers.map(async (b) => {
         if (req.user.username != b[0]) {
           const newDebt = new Debt({
-            from: req.user.username,
-            to: b[0],
+            lender: req.user.username,
+            borrower: b[0],
             amount: b[1],
             group: req.body.group,
           });

@@ -20,15 +20,15 @@ const getDebts = async (req, res) => {
 
 const getDebtBwUsers = async (req, res) => {
   try {
-    const from = req.params.from;
-    const to = req.params.to;
+    const lender = req.params.lender;
+    const borrower = req.params.borrower;
 
-    if (from != req.user.username) {
+    if (lender != req.user.username && borrower != req.user.username) {
       res.status(503).send("not allowed");
       return;
     }
 
-    const debts = await Debt.find({ from, to });
+    const debts = await Debt.find({ lender, borrower });
     res.status(200).send(debts);
   } catch (err) {
     res.status(500).send(err);
@@ -38,7 +38,7 @@ const getDebtBwUsers = async (req, res) => {
 const getLended = async (req, res) => {
   try {
     const debts = await Debt.find({
-      $and: [{ from: req.user.username }, { settled: false }],
+      $and: [{ lender: req.user.username }, { settled: false }],
     });
     res.status(200).send(debts);
   } catch (err) {
@@ -48,8 +48,8 @@ const getLended = async (req, res) => {
 
 const getOwed = async (req, res) => {
   try {
-    const to = req.user.username;
-    const debts = await Debt.find({ $and: [{ to }, { settled: false }] });
+    const borrower = req.user.username;
+    const debts = await Debt.find({ $and: [{ borrower }, { settled: false }] });
     res.status(200).send(debts);
   } catch (err) {
     res.status(500).send(err);
@@ -59,8 +59,8 @@ const getOwed = async (req, res) => {
 const addDebt = async (req, res) => {
   try {
     const newDebt = new Debt({
-      from: req.user.username,
-      to: req.body.to,
+      lender: req.user.username,
+      borrower: req.body.borrower,
       amount: req.body.amount,
       group: req.body.group,
     });
@@ -79,8 +79,8 @@ const editDebt = async (req, res) => {
       { _id: req.params.id },
       {
         $set: {
-          from: req.user.username,
-          to: req.body.to,
+          lender: req.user.username,
+          borrower: req.body.borrower,
           amount: req.body.amount,
           group: req.body.group,
         },
@@ -95,7 +95,7 @@ const editDebt = async (req, res) => {
 const settleDebt = async (req, res) => {
   try {
     const debt = await Debt.updateOne(
-      { $and: [{ to: req.user.username }, { _id: req.params.id }] },
+      { $and: [{ lender: req.user.username }, { _id: req.params.id }] },
       {
         $set: { settled: true },
       }
@@ -109,7 +109,7 @@ const settleDebt = async (req, res) => {
 const settleAll = async (req, res) => {
   try {
     const debt = await Debt.updateMany(
-      { $and: [{ to: req.params.with }, { from: req.user.username }] },
+      { $and: [{ borrower: req.params.with }, { lender: req.user.username }] },
       {
         $set: { settled: true },
       }
@@ -132,8 +132,8 @@ const delDebt = async (req, res) => {
 const delDebts = async (req, res) => {
   try {
     const debt = await Debt.deleteMany({
-      from: req.params.from,
-      to: req.params.to,
+      lender: req.params.lender,
+      borrower: req.params.borrower,
     });
     res.status(200).send(debt);
   } catch (err) {

@@ -7,12 +7,11 @@ const GroupSchema = new mongoose.Schema(
       require: true,
       min: 3,
       max: 20,
-      unique: true,
     },
     users: [
       {
         type: String,
-        required: true,
+        require: true,
       },
     ],
     admin: {

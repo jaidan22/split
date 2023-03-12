@@ -1,12 +1,12 @@
 const mongoose = require("mongoose");
 
 const DebtSchema = new mongoose.Schema({
-  from: {
+  lender: {
     type: String,
     max: [30],
     required: true,
   },
-  to: {
+  borrower: {
     type: String,
     max: [30],
     required: true,

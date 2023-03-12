@@ -8,6 +8,7 @@ const userRoute = require("./routes/user");
 const debtRoute = require("./routes/debt");
 const expenseRoute = require("./routes/expense");
 const authRoute = require("./routes/auth");
+const groupRoute = require("./routes/group");
 
 mongoose
   .connect(process.env.DB_URL)
@@ -30,6 +31,7 @@ app.use(cookieParser());
 app.use("/api", userRoute);
 app.use("/api", expenseRoute);
 app.use("/api", debtRoute);
+app.use("/api", groupRoute);
 app.use("/api/auth", authRoute);
 
 app.get("/", async (req, res) => {

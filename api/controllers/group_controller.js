@@ -1,5 +1,5 @@
 const Expense = require("../models/Expense");
-const Group = require("../models/Expense");
+const Group = require("../models/Group");
 
 const getGroups = async (req, res) => {
   try {
@@ -32,12 +32,11 @@ const addMem = async (req, res) => {
   try {
     const group = await Group.updateOne(
       { _id: req.body.id },
-      {
-        $set: { users: users.push(req.body.user) },
-      }
+      { $push: { users: req.body.user } }
     );
     res.status(200).send(group);
   } catch (err) {
+    console.log(err);
     res.status(500).send(err);
   }
 };
@@ -46,9 +45,7 @@ const dltMem = async (req, res) => {
   try {
     const group = await Group.updateOne(
       { _id: req.body.id },
-      {
-        $set: { users: users.splice(indexOf(req.body.user), 1) },
-      }
+      { $pull: { users: req.body.user } }
     );
     res.status(200).send(group);
   } catch (err) {
@@ -66,6 +63,7 @@ const createGrp = async (req, res) => {
     const group = await newGroups.save();
     res.status(200).send(group);
   } catch (err) {
+    console.log(err);
     res.status(500).send(err);
   }
 };
