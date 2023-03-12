@@ -15,6 +15,14 @@ const DebtSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
+  settled: {
+    type: Boolean,
+    default: false,
+  },
+  group: {
+    type: String,
+    default: null,
+  },
 });
 
 module.exports = mongoose.model("Debt", DebtSchema);

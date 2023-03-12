@@ -6,10 +6,6 @@ const ExpenseSchema = new mongoose.Schema({
     max: [50],
     required: true,
   },
-  author: {
-    type: String,
-    required: true,
-  },
   creationDatetime: {
     type: Date,
     default: Date.now,
@@ -18,17 +14,23 @@ const ExpenseSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  borrowers: [
-    {
-      type: [String, Number],
-      required: true,
-    },
-  ],
+  borrowers: {
+    type: Array,
+    default: [],
+  },
   amount: {
     type: Number,
     required: true,
     min: [0],
     max: [1000000],
+  },
+  settled: {
+    type: Boolean,
+    default: false,
+  },
+  group: {
+    type: String,
+    default: null,
   },
 });
 

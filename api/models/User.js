@@ -27,7 +27,6 @@ const UserSchema = new mongoose.Schema(
     },
     netDebt: {
       type: Number,
-      required: true,
     },
   },
   { timestamps: true }
