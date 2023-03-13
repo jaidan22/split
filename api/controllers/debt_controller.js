@@ -1,4 +1,6 @@
 const Debt = require("../models/Debt");
+const Group = require("../models/Group");
+const User = require("../models/User");
 
 const getDebt = async (req, res) => {
   try {
@@ -32,6 +34,77 @@ const getDebtBwUsers = async (req, res) => {
     res.status(200).send(debts);
   } catch (err) {
     res.status(500).send(err);
+  }
+};
+
+const getPeers = async (req, res) => {
+  try {
+    const borrowers = await Debt.find(
+      { lender: req.user.username },
+      { borrower: 1 }
+    );
+    const bIds = borrowers.map((b) => b.borrower);
+
+    const lenders = await Debt.find(
+      { borrower: req.user.username },
+      { lender: 1 }
+    );
+    const lIds = lenders.map((l) => l.lender);
+
+    const grpmems = await Group.find(
+      { users: { $in: [req.user.username] } },
+      { users: 1 }
+    );
+    const gIds = [
+      ...new Set(
+        grpmems.map((g) => g.users).reduce((acc, curr) => acc.concat(curr), [])
+      ),
+    ];
+
+    const peers = [...new Set([...lIds, ...bIds, ...gIds])];
+
+    // const peerUsers = await User.find(
+    //   { username: { $in: peers } },
+    //   { username: 1, name: 1 }
+    // );
+
+    // TRANSACTIONS BETWEEN PEERS
+    const debtsBwPeers = await Debt.find(
+      {
+        $and: [
+          { borrower: { $in: peers } },
+          { lender: { $in: peers } },
+          { settled: false },
+        ],
+      },
+      { lender: 1, borrower: 1, amount: 1 }
+    );
+
+    // GET NET DEBT
+    const netDebt = peers.map((p) => {
+      let net = 0;
+      for (let x in debtsBwPeers) {
+        if (debtsBwPeers[x].lender == p) net += debtsBwPeers[x].amount;
+        else if (debtsBwPeers[x].borrower == p) net -= debtsBwPeers[x].amount;
+      }
+      return { name: p, netDebt: net };
+    });
+    netDebt.sort((a, b) => a.netDebt - b.netDebt);
+
+    res.status(200).send({ peers, debtsBwPeers, netDebt });
+  } catch (err) {
+    res.status(503).send(err);
+    console.log(err);
+  }
+};
+
+const getSimplifiedDebts = async (req, res) => {
+  try {
+    const netDebt = req.body.netDebt;
+    // res.status(200).send(peers);
+  } catch (err) {
+    res.status(500).send(err);
+    console.log(err);
   }
 };
 
@@ -145,6 +218,8 @@ module.exports = {
   getDebt,
   getDebts,
   getDebtBwUsers,
+  getPeers,
+  getSimplifiedDebts,
   getOwed,
   getLended,
   addDebt,

@@ -16,11 +16,14 @@ app.get("/owed", verify, debtController.getOwed);
 // Get details of a single debt.
 app.get("/debts/:id", verify, debtController.getDebt);
 
-// Get a list of all optimised debts.
-// app.get("/optimisedDebts", debtController.getOptimisedDebts);
-
 // Get debts by between 2 users
 app.get("/debts/:from/:to", verify, debtController.getDebtBwUsers);
+
+// Get a list of transactions for smart settling
+app.get("/peers", verify, debtController.getPeers);
+
+// Get a list of transactions for smart settling
+app.post("/debts/simplified", verify, debtController.getSimplifiedDebts);
 
 // Add a new debt between two users.
 app.post("/debts", verify, debtController.addDebt);
@@ -39,8 +42,6 @@ app.delete("/debts/:id", verify, debtController.delDebt);
 
 // Delete all debts between a lender and borrower.
 app.delete("/debts/:from/:to", verify, debtController.delDebts);
-
-
 
 // =================== TESTING =============================
 app.delete("/debt/:to", async (req, res) => {
