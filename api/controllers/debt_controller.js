@@ -63,11 +63,6 @@ const getPeers = async (req, res) => {
 
     const peers = [...new Set([...lIds, ...bIds, ...gIds])];
 
-    // const peerUsers = await User.find(
-    //   { username: { $in: peers } },
-    //   { username: 1, name: 1 }
-    // );
-
     // TRANSACTIONS BETWEEN PEERS
     const debtsBwPeers = await Debt.find(
       {
@@ -84,12 +79,12 @@ const getPeers = async (req, res) => {
     const netDebt = peers.map((p) => {
       let net = 0;
       for (let x in debtsBwPeers) {
-        if (debtsBwPeers[x].lender == p) net += debtsBwPeers[x].amount;
-        else if (debtsBwPeers[x].borrower == p) net -= debtsBwPeers[x].amount;
+        if (debtsBwPeers[x].lender == p) net -= debtsBwPeers[x].amount;
+        else if (debtsBwPeers[x].borrower == p) net += debtsBwPeers[x].amount;
       }
       return { name: p, netDebt: net };
     });
-    netDebt.sort((a, b) => a.netDebt - b.netDebt);
+    netDebt.sort((a, b) => a.netDebt - b.netDebt).reverse();
 
     res.status(200).send({ peers, debtsBwPeers, netDebt });
   } catch (err) {
@@ -101,7 +96,44 @@ const getPeers = async (req, res) => {
 const getSimplifiedDebts = async (req, res) => {
   try {
     const netDebt = req.body.netDebt;
-    // res.status(200).send(peers);
+    netDebt.sort((a, b) => a.netDebt - b.netDebt).reverse();
+
+    const transactions = [];
+    const l = netDebt.length;
+
+    // LOGIC FOR SIMPLIFIED SETTLING
+    for (; netDebt[0].netDebt != 0 && netDebt[l - 1].netDebt != 0; ) {
+      transactions.push({
+        from: netDebt[0].name,
+        to: netDebt[l - 1].name,
+        amount: netDebt[0].netDebt,
+      });
+      netDebt[l - 1].netDebt += netDebt[0].netDebt;
+      netDebt[0].netDebt = 0;
+      netDebt.sort((a, b) => a.netDebt - b.netDebt).reverse();
+    }
+
+    res.status(200).send(transactions);
+  } catch (err) {
+    res.status(500).send(err);
+    console.log(err);
+  }
+};
+
+const settleSimplifiedDebts = async (req, res) => {
+  try {
+    const debtsBwPeers = req.body.debtsBwPeers;
+    const ids = debtsBwPeers.map((debt) => debt._id);
+    console.log(ids);
+
+    const settled = await Debt.updateMany(
+      {
+        _id: { $in: ids },
+      },
+      { settled: true }
+    );
+
+    res.status(200).send(settled);
   } catch (err) {
     res.status(500).send(err);
     console.log(err);
@@ -220,6 +252,7 @@ module.exports = {
   getDebtBwUsers,
   getPeers,
   getSimplifiedDebts,
+  settleSimplifiedDebts,
   getOwed,
   getLended,
   addDebt,

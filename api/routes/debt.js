@@ -25,6 +25,9 @@ app.get("/peers", verify, debtController.getPeers);
 // Get a list of transactions for smart settling
 app.post("/debts/simplified", verify, debtController.getSimplifiedDebts);
 
+// Get a list of transactions for smart settling
+app.post("/debts/simplified/settle", verify, debtController.settleSimplifiedDebts);
+
 // Add a new debt between two users.
 app.post("/debts", verify, debtController.addDebt);
 
