@@ -7,7 +7,7 @@ const app = express();
 app.get("/users", verify, userController.getUsers);
 
 // Get a single user
-app.get("/user/:id", verify, userController.getUser);
+app.get("/user/:username", verify, userController.getUser);
 
 // Edit user
 app.put("/user/:id", verify, userController.updateUser);
