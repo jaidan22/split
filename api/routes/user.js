@@ -1,21 +1,24 @@
 const express = require("express");
 const userController = require("../controllers/user_controller");
 const verify = require("../verifyToken");
-const app = express();
+const router = express.Router();
 
 // Get all users
-app.get("/users", verify, userController.getUsers);
+router.get("/users", verify, userController.getUsers);
+
+// Get users to which signed in user has done transactions
+router.get("/previous", verify, userController.previous);
 
 // Get a single user
-app.get("/user/:username", verify, userController.getUser);
+router.get("/user/:username", verify, userController.getUser);
 
 // Edit user
-app.put("/user/:id", verify, userController.updateUser);
+router.put("/user/:id", verify, userController.updateUser);
 
 // Delete a user
-app.delete("/user/:id", verify, userController.dltUser);
+router.delete("/user/:id", verify, userController.dltUser);
 
 // Delete all users
-app.delete("/users", verify, userController.dltAllUsers);
+router.delete("/users", verify, userController.dltAllUsers);
 
-module.exports = app;
+module.exports = router;

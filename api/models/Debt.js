@@ -19,6 +19,10 @@ const DebtSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
+  creationDatetime: {
+    type: Date,
+    default: Date.now,
+  },
   group: {
     type: String,
     default: null,

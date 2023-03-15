@@ -5,6 +5,7 @@ const jwt = require("jsonwebtoken");
 const login = async (req, res) => {
   try {
     const user = await User.findOne({ username: req.body.username });
+    // console.log(user);
     !user && res.status(404).json("user not found");
 
     const validPassword = await bcrypt.compare(
@@ -30,6 +31,7 @@ const login = async (req, res) => {
       .status(200)
       .json(user);
   } catch (err) {
+    console.log(err, res);
     res.status(500).json(err);
   }
 };

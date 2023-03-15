@@ -22,17 +22,13 @@ const getDebts = async (req, res) => {
 
 const getDebtBwUsers = async (req, res) => {
   try {
-    const lender = req.params.lender;
-    const borrower = req.params.borrower;
-
-    if (lender != req.user.username && borrower != req.user.username) {
-      res.status(503).send("not allowed");
-      return;
-    }
-
-    const debts = await Debt.find({ lender, borrower });
+    const debts = await Debt.find({
+      lender: { $in: [req.user.username, req.params.with] },
+      borrower: { $in: [req.user.username, req.params.with] },
+    }).sort({ creationDate: 1 });
     res.status(200).send(debts);
   } catch (err) {
+    console.log(err);
     res.status(500).send(err);
   }
 };
@@ -61,6 +57,7 @@ const getPeers = async (req, res) => {
       ),
     ];
 
+    // USERNAME OF PEERS
     const peers = [...new Set([...lIds, ...bIds, ...gIds])];
 
     // TRANSACTIONS BETWEEN PEERS
@@ -145,7 +142,11 @@ const getLended = async (req, res) => {
     const debts = await Debt.find({
       $and: [{ lender: req.user.username }, { settled: false }],
     });
-    res.status(200).send(debts);
+    let total = 0;
+    debts.map((d) => {
+      total += d.amount;
+    });
+    res.status(200).send({ debts, total });
   } catch (err) {
     res.status(500).send(err);
   }
@@ -155,7 +156,11 @@ const getOwed = async (req, res) => {
   try {
     const borrower = req.user.username;
     const debts = await Debt.find({ $and: [{ borrower }, { settled: false }] });
-    res.status(200).send(debts);
+    let total = 0;
+    debts.map((d) => {
+      total += d.amount;
+    });
+    res.status(200).send({ debts, total });
   } catch (err) {
     res.status(500).send(err);
   }
