@@ -1,0 +1,22 @@
+.cardpanel {
+  .lended,
+  .borrowed {
+    cursor: pointer;
+  }
+
+  @media (max-width: 450px) {
+    .h-7-8 {
+      height: 87.5%;
+    }
+  }
+}
+.h-7-8 {
+  height: calc(87.5% - 2.25rem);
+}
+.lended:hover {
+  box-shadow: 5px 5px rgb(5, 116, 5);
+}
+
+.borrowed:hover {
+  box-shadow: 5px 5px rgb(161, 15, 15);
+}

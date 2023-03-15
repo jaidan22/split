@@ -43,7 +43,7 @@ const UsersPanel = () => {
                 <ListItemAvatar>
                   <Avatar>
                     <img
-                      src={`https://api.dicebear.com/5.x/pixel-art/svg?seed=${d.username}`}
+                      src={`https://api.dicebear.com/5.x/avataaars/svg?seed=${d.username}`}
                       alt=""
                     />
                   </Avatar>
