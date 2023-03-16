@@ -33,6 +33,7 @@ const GroupExpenses = ({ data }) => {
           return <ExpenseCard data={t} lender={true} />;
         else return <ExpenseCard data={t} />;
       })}
+      {expenseData?.length == 0 && <span>No Expenses Found !</span>}
       <div ref={eofRef} />
     </div>
   );
