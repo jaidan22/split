@@ -3,7 +3,9 @@ const Group = require("../models/Group");
 
 const getGroups = async (req, res) => {
   try {
-    const groups = await Group.find();
+    const groups = await Group.find({
+      users: req.user.username,
+    });
     res.status(200).send(groups);
   } catch (err) {
     res.status(500).send(err);
@@ -12,7 +14,7 @@ const getGroups = async (req, res) => {
 
 const getGroup = async (req, res) => {
   try {
-    const groups = await Group.find({ _id: req.params.id });
+    const groups = await Group.findOne({ _id: req.params.id });
     res.status(200).send(groups);
   } catch (err) {
     res.status(500).send(err);
@@ -32,7 +34,7 @@ const addMem = async (req, res) => {
   try {
     const group = await Group.updateOne(
       { _id: req.body.id },
-      { $push: { users: req.body.user } }
+      { $push: { users: req.body.users } }
     );
     res.status(200).send(group);
   } catch (err) {
@@ -45,7 +47,7 @@ const dltMem = async (req, res) => {
   try {
     const group = await Group.updateOne(
       { _id: req.body.id },
-      { $pull: { users: req.body.user } }
+      { $pull: { users: { $in: req.body.users } } }
     );
     res.status(200).send(group);
   } catch (err) {
@@ -56,7 +58,7 @@ const dltMem = async (req, res) => {
 const createGrp = async (req, res) => {
   try {
     const newGroups = new Group({
-      groupName: req.body.groupName,
+      groupname: req.body.groupname,
       users: req.body.users,
       admin: req.user.username,
     });

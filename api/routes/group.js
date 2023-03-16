@@ -6,7 +6,7 @@ const router = express.Router();
 // Create group
 router.post("/group", verify, groupController.createGrp);
 
-// List all groups
+// List groups of signed in user
 router.get("/groups", verify, groupController.getGroups);
 
 // Get a particular group
@@ -15,11 +15,11 @@ router.get("/group/:id", verify, groupController.getGroup);
 // Get all expenses in a group
 router.get("/group/expenses/:id", verify, groupController.getExpenses);
 
-// Add user to group
-router.put("/group/addUser", verify, groupController.addMem);
+// Add users to group
+router.put("/group/addUsers", verify, groupController.addMem);
 
-// Delete user from group
-router.put("/group/dltUser", verify, groupController.dltMem);
+// Delete users from group
+router.put("/group/dltUsers", verify, groupController.dltMem);
 
 // Delete group
 router.delete("/group/:id", verify, groupController.dltGrp);
