@@ -19,13 +19,13 @@ router.get("/debts/:id", verify, debtController.getDebt);
 // Get debts by between 2 users
 router.get("/debts/bw/:with", verify, debtController.getDebtBwUsers);
 
-// Get a list of transactions for smart settling
+// Get a list of peers,debts and netdebts for smart settling
 router.get("/peers", verify, debtController.getPeers);
 
 // Get a list of transactions for smart settling
 router.post("/debts/simplified", verify, debtController.getSimplifiedDebts);
 
-// Get a list of transactions for smart settling
+// settling
 router.post(
   "/debts/simplified/settle",
   verify,
@@ -50,17 +50,5 @@ router.delete("/debts/:id", verify, debtController.delDebt);
 // Delete all debts between a lender and borrower.
 router.delete("/debts/:from/:to", verify, debtController.delDebts);
 
-// =================== TESTING =============================
-router.delete("/debt/:to", async (req, res) => {
-  try {
-    const debt = await Debt.deleteMany({
-      from: req.params.to,
-    });
-    res.status(200).send(debt);
-  } catch (err) {
-    res.status(500).send(err);
-    console.log(err);
-  }
-});
 
 module.exports = router;
