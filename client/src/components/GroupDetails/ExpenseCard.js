@@ -125,10 +125,6 @@ const ExpenseCard = ({ data, borrower, lender }) => {
           <span className="amt text-slate-800 font-bold sm:text-5xl text-3xl mt-4">
             {data?.amount}
           </span>
-          <span className="title font-bold text-lg text-red-800 my-4 flex justify-center">
-            {/* <ReceiptIcon className="mr-1" />
-            To be paid */}
-          </span>
         </div>
       </div>
     );

@@ -21,6 +21,7 @@ export const AuthContextProvider = ({ children }) => {
       );
       setCurrentUser(res.data);
     } catch (err) {
+      alert(err.response.data);
       console.log(err);
     }
     setLoading(false);

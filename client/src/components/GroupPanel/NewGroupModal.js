@@ -6,7 +6,7 @@ import { AuthContext } from "../../context/authContext";
 const NewGroupModal = ({ open, setOpen }) => {
   const { currentUser } = useContext(AuthContext);
   const [users, setUsers] = useState([]);
-  const [newusers, setNewUsers] = useState([]);
+  const [newusers, setNewUsers] = useState([currentUser.username]);
   const [grpname, setGrpname] = useState("");
 
   const handleChange = (e) => {
@@ -129,7 +129,7 @@ const NewGroupModal = ({ open, setOpen }) => {
           onClick={addMems}
           className="new-expense font-bold text-lg hover:shadow-md flex flex-col justify-center w-auto  h-auto px-4 py-2 bg-slate-600 rounded-lg text-slate-50 items-center my-4"
         >
-          Add
+          Create
         </button>
       </div>
     </Modal>

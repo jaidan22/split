@@ -59,6 +59,7 @@ const SearchBar = () => {
         placeholder="Search"
         autoFocus={true}
         value={keyword}
+        onBlur={() => showResults("")}
         onChange={(e) => {
           showResults(e.target.value);
         }}
@@ -68,25 +69,25 @@ const SearchBar = () => {
       {open && (
         <div className="result-container absolute bg-gray-200 sm:right-4 sm:top-12 top-12 h-auto rounded-2xl">
           {searchRes?.map((d) => (
-          // <List>
-              <ListItem>
-                <ListItemButton
-                  onClick={() => navigate(`/users/${d.username}`)}
-                >
-                  <ListItemAvatar>
-                    <Avatar>
-                      <img
-                        src={`https://api.dicebear.com/5.x/avataaars/svg?seed=${d.username}`}
-                        alt=""
-                      />
-                    </Avatar>
-                  </ListItemAvatar>
-                  <ListItemText primary={d.name} secondary={d.username} />
-                </ListItemButton>
-              </ListItem>
+            // <List>
+            <ListItem>
+              <ListItemButton onClick={() => navigate(`/users/${d.username}`)}>
+                <ListItemAvatar>
+                  <Avatar>
+                    <img
+                      src={`https://api.dicebear.com/5.x/avataaars/svg?seed=${d.username}`}
+                      alt=""
+                    />
+                  </Avatar>
+                </ListItemAvatar>
+                <ListItemText primary={d.name} secondary={d.username} />
+              </ListItemButton>
+            </ListItem>
             // </List>
           ))}
-          {searchRes.length == 0 && <div className="text-red-600 font-bold my-4">No users found ! </div>}
+          {searchRes.length == 0 && (
+            <div className="text-red-600 font-bold my-4">No users found ! </div>
+          )}
         </div>
       )}
     </div>

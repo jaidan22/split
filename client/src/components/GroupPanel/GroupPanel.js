@@ -22,7 +22,7 @@ const GroupPanel = () => {
       request
         .get("/groups")
         .then((res) => {
-          console.log(res.data);
+          // console.log(res.data);
           setData(res.data);
         })
         .catch((err) => {
@@ -61,7 +61,7 @@ const GroupPanel = () => {
       </List>
       <div className="controls flex justify-evenly items-center mt-8">
         <button
-          className="new-expense font-bold text-lg hover:shadow-md flex flex-col justify-center sm:w-56 sm:h-20 h-12 p-4 bg-slate-600 rounded-lg w-32 text-slate-50 items-center"
+          className="new-expense font-bold text-lg hover:shadow-md flex flex-col justify-center sm:w-56 sm:h-20 h-12 p-4 bg-slate-600 rounded-lg w-auto text-slate-50 items-center"
           onClick={() => {
             setOpen(true);
           }}

@@ -7,11 +7,10 @@ import ListItemAvatar from "@mui/material/ListItemAvatar";
 import ListItemText from "@mui/material/ListItemText";
 import Avatar from "@mui/material/Avatar";
 import ListItemButton from "@mui/material/ListItemButton";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { useNavigate } from "react-router";
 
 const UsersPanel = () => {
-  const { logout, setLoading } = useContext(AuthContext);
+  const { setLoading } = useContext(AuthContext);
   const [data, setData] = useState([]);
   const navigate = useNavigate();
 
@@ -53,6 +52,12 @@ const UsersPanel = () => {
             </ListItem>
           );
         })}
+        {data.length == 0 && (
+          <span>
+            No users found ! <br />
+            Search to find users and start tracking expenses
+          </span>
+        )}
       </List>
     </div>
   );
