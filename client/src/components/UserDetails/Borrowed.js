@@ -3,7 +3,12 @@ import ReceiptIcon from "@mui/icons-material/Receipt";
 
 const Borrowed = ({ data }) => {
   return (
-    <div className="flex justify-start max-w-3xl m-auto my-4">
+    <div className="flex justify-start max-w-3xl m-auto my-4 relative">
+      <img
+        src={`https://api.dicebear.com/5.x/avataaars/svg?seed=${data.lender}`}
+        alt=""
+        className="avatar-borrow absolute w-10 h-10 bottom-4 hidden sm:block"
+      />
       <div className="borrowed hover:shadow-md flex flex-col justify-center sm:w-56 sm:h-auto p-4 bg-red-200 rounded-lg w-48">
         <span className="title font-bold text-lg text-red-800 mt-4 flex justify-center">
           Borrowed

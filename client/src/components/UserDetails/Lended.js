@@ -18,7 +18,12 @@ const Lended = ({ data }) => {
   };
 
   return (
-    <div className="flex justify-end max-w-3xl m-auto my-4">
+    <div className="flex justify-end max-w-3xl m-auto my-4 relative">
+      <img
+        src={`https://api.dicebear.com/5.x/avataaars/svg?seed=${data.lender}`}
+        alt=""
+        className="avatar-lender absolute w-10 h-10 bottom-4 hidden sm:block"
+      />
       <div className="lended hover:shadow-md flex flex-col space-x-0 justify-center sm:w-56 h-auto p-4 bg-green-200 rounded-lg w-48">
         <span className="title font-bold text-lg text-green-800 mt-4 flex justify-center">
           Lended
