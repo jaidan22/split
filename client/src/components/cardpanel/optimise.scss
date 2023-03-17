@@ -1,0 +1,15 @@
+@media (min-width: 425px) {
+  .grow-1 {
+    flex-grow: 2;
+  }
+  .grow-2 {
+    flex-grow: 3;
+  }
+}
+.transparent{
+  background: transparent !important;
+}
+
+.settle-txns:hover {
+  box-shadow: 5px 5px rgb(5, 116, 5);
+}
