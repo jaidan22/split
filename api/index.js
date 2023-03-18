@@ -17,7 +17,11 @@ mongoose
 
 //middleware
 app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Credentials", true);
+  res.setHeader("Access-Control-Allow-Credentials", true);
+  res.setHeader(
+    "Access-Control-Allow-Origin",
+    "https://wisebillsplit.netlify.app"
+  );
   next();
 });
 app.use(express.json());
