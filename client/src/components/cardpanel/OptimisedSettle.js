@@ -92,9 +92,21 @@ const OptimisedSettle = () => {
             </div>
             {minTrxns.map((t) => (
               <div className="txn flex justify-evenly w-full py-1 gap-4 border-b-2 border-slate-400">
-                <li className="list-none text-left w-20 ">{t.from}</li>
-                <li className="list-none text-left w-20 ">{t.to}</li>
-                <li className="list-none text-left w-20 ">{t.amount}</li>
+                <li className="list-none text-left w-20 flex items-center gap-1">
+                  <img className="h-8"
+                    src={`https://api.dicebear.com/5.x/avataaars/svg?seed=${t.from}`}
+                    alt=""
+                  />
+                  {t.from}
+                </li>
+                <li className="list-none text-left w-20 flex items-center gap-1">
+                  <img className="h-8"
+                    src={`https://api.dicebear.com/5.x/avataaars/svg?seed=${t.to}`}
+                    alt=""
+                  />
+                  {t.to}
+                </li>
+                <li className="list-none text-left w-20 flex items-center gap-1">{t.amount}</li>
               </div>
             ))}
             <button
