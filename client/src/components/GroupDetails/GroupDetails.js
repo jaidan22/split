@@ -6,6 +6,7 @@ import ExpenseCard from "./ExpenseCard";
 const GroupExpenses = ({ data }) => {
   const { currentUser, setLoading } = useContext(AuthContext);
   const [expenseData, setExpense] = useState();
+  const [scrolling, setScrolling] = useState(true);
   const eofRef = useRef();
 
   useEffect(() => {
@@ -20,10 +21,16 @@ const GroupExpenses = ({ data }) => {
     };
     getTData();
     setLoading(false);
+    scrolling && eofRef.current?.scrollIntoView({ behavior: "smooth" });
   });
 
   return (
-    <div className="expenses w-full h-70 mt-4 bg-slate-100 rounded-lg overflow-y-scroll p-4 py-8 sm:mx-0 m-auto">
+    <div
+      className="expenses w-full h-70 mt-4 bg-slate-100 rounded-lg overflow-y-scroll p-4 py-8 sm:mx-0 m-auto"
+      onScroll={() => {
+        setScrolling(false);
+      }}
+    >
       {expenseData?.map((t) => {
         const borrowed = t.borrowers
           .map((b) => b.includes(currentUser.username))

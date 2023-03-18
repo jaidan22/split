@@ -38,8 +38,16 @@ const GroupPage = () => {
 
       {/* MODALS */}
       {open && <CreateExpModal open={open} setOpen={setOpen} data={data} />}
-      {memModal && <AddMemModal open={memModal} setOpen={setMembersOpen} data={data} />}
-      {removeModal && <RemoveMemsModal open={removeModal} setOpen={setRemoveOpen} data={data} />}
+      {memModal && (
+        <AddMemModal open={memModal} setOpen={setMembersOpen} data={data} />
+      )}
+      {removeModal && (
+        <RemoveMemsModal
+          open={removeModal}
+          setOpen={setRemoveOpen}
+          data={data}
+        />
+      )}
 
       <div className="main h-screen sm:w-10/12 w-screen">
         <TopBar />
