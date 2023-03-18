@@ -26,12 +26,9 @@ const CreateExpModal = ({ open, setOpen, data }) => {
         total += Number(user[1]);
       }
     });
-    if (splitType == 0 && total != amount) {
+    if (total != amount) {
       console.log({ amount, total });
       alert("Total amount is not matching");
-      return false;
-    } else if (splitType == 1 && total != 100) {
-      alert("Total percentage is not 100");
       return false;
     }
 
@@ -56,8 +53,8 @@ const CreateExpModal = ({ open, setOpen, data }) => {
   };
 
   const clearAll = () => {
-    setAmount(0);
-    setExpName("");
+    // setAmount(0);
+    // setExpName("");
     checkRef.current.map((c, i) => {
       c.checked = false;
     });

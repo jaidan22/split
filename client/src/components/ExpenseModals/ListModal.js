@@ -5,7 +5,7 @@ const ListModal = ({ title, data, open, active, type }) => {
   if (active)
     return (
       <div className={"listmodal-container absolute w-screen h-screen "}>
-        <div className={"listmodal p-4 shadow-2xl bg-white absolute pb-8"}>
+        <div className={"listmodal p-4 shadow-2xl bg-white absolute pb-8 rounded-2xl"}>
           <div className="title flex justify-between m-3">
             <span className="text-xl font-bold">{title}</span>
             <span

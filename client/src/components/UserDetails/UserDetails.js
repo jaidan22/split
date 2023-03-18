@@ -15,9 +15,9 @@ const UserDetails = ({ user }) => {
   //     eofRef.current?.scrollIntoView();
   //   });
 
-  //   useEffect(() => {
-  //     eofRef.current?.scrollIntoView();
-  //   }, []);
+    useEffect(() => {
+      eofRef.current?.scrollIntoView();
+    }, []);
 
   useEffect(() => {
     const getTData = async () => {
@@ -31,7 +31,7 @@ const UserDetails = ({ user }) => {
     };
     getTData();
     setLoading(false);
-  });
+  },[transactoinData]);
 
   return (
     <div className="transactions w-full h-70 mt-4 bg-slate-100 rounded-lg overflow-y-scroll p-4 py-8 sm:mx-0 m-auto">
@@ -39,6 +39,8 @@ const UserDetails = ({ user }) => {
         if (t.lender == currentUser.username) return <Lended data={t} />;
         else return <Borrowed data={t} />;
       })}
+      {transactoinData?.length == 0 && <span>No Expenses Found !</span>}
+
       <div ref={eofRef} />
     </div>
   );

@@ -14,7 +14,7 @@ const ListPopUp = ({ title, data, open, active, type }) => {
           "listPopUp-container absolute w-screen h-screen top-0 left-0"
         }
       >
-        <div className={"listPopUp p-4 shadow-2xl bg-white absolute pb-8"}>
+        <div className={"listPopUp p-4 shadow-2xl bg-white absolute pb-8 rounded-2xl"}>
           <div className="title flex justify-between m-3">
             <span className="text-xl font-bold">{title}</span>
             <span

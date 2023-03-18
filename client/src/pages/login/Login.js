@@ -5,7 +5,6 @@ import "./login.scss";
 
 const Login = () => {
   const { login } = useContext(AuthContext);
-  const [err, setErr] = useState(null);
   const [inputs, setInputs] = useState({
     username: "",
     password: "",
@@ -15,14 +14,17 @@ const Login = () => {
   const handleChange = (e) => {
     setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      await login(inputs);
+    // try {
+    await login(inputs).then(() => {
       return navigate("/");
-    } catch (err) {
-      setErr(err);
-    }
+    });
+    // .catch((err) => {
+    //   alert(err.response.data);
+    //   console.log(err.response.data);
+    // });
   };
 
   return (

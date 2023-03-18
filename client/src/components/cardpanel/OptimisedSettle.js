@@ -44,6 +44,7 @@ const OptimisedSettle = () => {
         netDebt: peers?.netDebt,
       });
       setMinTrxns(res.data);
+      console.log(res);
     } catch (err) {
       console.log(err);
     }
@@ -64,31 +65,33 @@ const OptimisedSettle = () => {
 
   return (
     <div className="optimised-settle mt-4">
-      <div className="title">
+      <div className="title flex">
         <h2 className="text-left font-bold text-xl">Optimised Settle</h2>
+        {peers.length != 0 && (
+          <label class="switch ml-4">
+            <input
+              type="checkbox"
+              onChange={(e) => {
+                return e.target.checked ? getTrxns() : setMinTrxns([]);
+              }}
+            />
+            <span class="slider round"></span>
+          </label>
+        )}
       </div>
-
-      {peers.length != 0 && (
-        <button
-          className="view-txns m-auto mt-4 sm:text-base text-sm hover:shadow-md  h-auto w-auto p-4 bg-slate-600 rounded-lg text-slate-50"
-          onClick={getTrxns}
-        >
-          View required Transactions
-        </button>
-      )}
 
       <div className="cards flex mt-4 w-full flex-col justify-evenly gap-4">
         {/* REQUIRED TRANSACTIONS */}
         {minTrxns.length != 0 && (
-          <div className="mintxns flex flex-col space-x-0 justify-center items-center p-4 bg-purple-200 rounded-lg sm:w-1/2 w-full sm:m-auto h-full grow-2">
+          <div className="mintxns flex flex-col space-x-0 justify-center items-center p-4 bg-purple-200 rounded-lg  w-full  h-full grow-2">
             <span className="font-bold"> Minimum Transactions</span>
-            <div className="txn flex mt-4 justify-evenly w-full py-1 gap-4">
+            <div className="txn flex mt-4 justify-evenly w-full py-1 gap-4 border-b-2	 border-slate-400">
               <li className="list-none text-left w-20 font-bold">From</li>
               <li className="list-none text-left w-20 font-bold">To</li>
               <li className="list-none text-left w-20 font-bold">Amount</li>
             </div>
             {minTrxns.map((t) => (
-              <div className="txn flex justify-evenly w-full py-1 gap-4">
+              <div className="txn flex justify-evenly w-full py-1 gap-4 border-b-2 border-slate-400">
                 <li className="list-none text-left w-20 ">{t.from}</li>
                 <li className="list-none text-left w-20 ">{t.to}</li>
                 <li className="list-none text-left w-20 ">{t.amount}</li>
@@ -131,7 +134,7 @@ const OptimisedSettle = () => {
           {/* DEBTS */}
           {peers.length != 0 && (
             <div className="debts flex flex-col space-x-0 justify-center p-4 bg-blue-100 rounded-lg w-full h-full grow-2">
-              <span className="font-bold"> Debts</span>
+              <span className="font-bold"> Debts between Peers</span>
 
               <TableContainer component={Paper} className="transparent">
                 <Table aria-label="simple table">
