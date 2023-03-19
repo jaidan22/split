@@ -22,8 +22,21 @@ app.use((req, res, next) => {
     "Access-Control-Allow-Origin",
     "https://wisebillsplit.netlify.app"
   );
+  res.setHeader(
+    "Access-Control-Allow-Methods",
+    "GET,OPTIONS,PATCH,DELETE,POST,PUT"
+  );
+  res.setHeader(
+    "Access-Control-Allow-Headers",
+    "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version"
+  );
+  if (req.method === "OPTIONS") {
+    res.status(200).end();
+    return;
+  }
   next();
 });
+
 app.use(express.json());
 app.use(
   cors({
