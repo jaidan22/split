@@ -13,14 +13,14 @@ const ExpenseCard = ({ data, borrower, lender }) => {
   const [lendedList, setLendedList] = useState(false);
 
   const handleSettle = async () => {
-    setLoading(true);
+    // setLoading(true);
     try {
       await request.put(`/expense/settle/${data._id}`);
-      setLoading(false);
+      // setLoading(false);
       window.location.reload();
     } catch (err) {
       console.log(err);
-      setLoading(false);
+      // setLoading(false);
     }
   };
 

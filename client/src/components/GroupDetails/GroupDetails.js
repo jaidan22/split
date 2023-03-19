@@ -9,7 +9,7 @@ const GroupExpenses = ({ expenseData }) => {
   const eofRef = useRef();
 
   useEffect(() => {
-    setLoading(false);
+    // setLoading(false);
     scrolling && eofRef.current?.scrollIntoView({ behavior: "smooth" });
   },[]);
 

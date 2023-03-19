@@ -14,7 +14,7 @@ const CardPanel = () => {
 
   useEffect(() => {
     const getData = async () => {
-      setLoading(true);
+      // setLoading(true);
       request
         .get(`${process.env.REACT_APP_API_URL}/lended`)
         .then((res) => {
@@ -30,12 +30,12 @@ const CardPanel = () => {
         .then((res) => {
           setBorrowedData(res.data);
           // console.log(res.data);
-          setLoading(false);
+          // setLoading(false);
         })
         .catch((err) => {
           console.log(err);
           // if (err.response.status == 401) logout();
-          setLoading(false);
+          // setLoading(false);
         });
     };
     getData();

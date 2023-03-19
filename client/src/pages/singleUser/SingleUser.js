@@ -26,17 +26,17 @@ const SingleUser = () => {
 
   const newPayment = async () => {
     setOpen(false);
-    setLoading(true);
+    // setLoading(true);
     try {
       await request.post("/debts", {
         lender: currentUser.username,
         borrower: username,
         amount,
       });
-      setLoading(false);
+      // setLoading(false);
       window.location.reload();
     } catch (err) {
-      setLoading(false);
+      // setLoading(false);
       console.log(err);
     }
     // console.log(amount);
@@ -44,7 +44,7 @@ const SingleUser = () => {
 
   useEffect(() => {
     const getData = async () => {
-      setLoading(true);
+      // setLoading(true);
       request
         .get(`/user/${username}`)
         .then(async (res) => {
@@ -53,11 +53,11 @@ const SingleUser = () => {
             `/debts/bw/${res.data.username}`
           );
           setTransactions(transactions.data);
-          setLoading(false);
+          // setLoading(false);
         })
         .catch((err) => {
           console.log(err);
-          setLoading(false);
+          // setLoading(false);
         });
     };
     getData();

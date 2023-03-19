@@ -10,7 +10,7 @@ export const AuthContextProvider = ({ children }) => {
   const [loading, setLoading] = useState(false);
 
   const login = async (inputs) => {
-    setLoading(true);
+    // setLoading(true);
     try {
       const res = await axios.post(
         `${process.env.REACT_APP_API_URL}/auth/login`,
@@ -20,19 +20,19 @@ export const AuthContextProvider = ({ children }) => {
         }
       );
       setCurrentUser(res.data);
-      setLoading(false);
+      // setLoading(false);
     } catch (err) {
       alert(err.response.data);
-      setLoading(false);
+      // setLoading(false);
       console.log(err);
     }
   };
 
   const logout = async () => {
-    setLoading(true);
+    // setLoading(true);
     await axios.post(`${process.env.REACT_APP_API_URL}/auth/logout`);
     setCurrentUser(null);
-    setLoading(false);
+    // setLoading(false);
   };
 
   useEffect(() => {

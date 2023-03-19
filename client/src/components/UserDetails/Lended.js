@@ -7,13 +7,13 @@ const Lended = ({ data }) => {
   const { currentUser, setLoading } = useContext(AuthContext);
 
   const handleClick = async () => {
-    setLoading(true);
+    // setLoading(true);
     try {
       await request.put(`/debts/settle/${data._id}`);
-      setLoading(false);
+      // setLoading(false);
       window.location.reload();
     } catch (err) {
-      setLoading(false);
+      // setLoading(false);
       console.log(err);
     }
   };

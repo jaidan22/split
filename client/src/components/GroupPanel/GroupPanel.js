@@ -18,17 +18,17 @@ const GroupPanel = () => {
 
   useEffect(() => {
     const getData = async () => {
-      setLoading(true);
+      // setLoading(true);
       request
         .get("/groups")
         .then((res) => {
           // console.log(res.data);
           setData(res.data);
-          setLoading(false);
+          // setLoading(false);
         })
         .catch((err) => {
           console.log(err);
-          setLoading(false);
+          // setLoading(false);
         });
     };
     getData();

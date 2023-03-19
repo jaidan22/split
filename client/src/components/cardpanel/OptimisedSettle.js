@@ -24,17 +24,17 @@ const OptimisedSettle = () => {
   const navigate = useNavigate();
 
   const settle = async () => {
-    setLoading(true);
+    // setLoading(true);
     try {
       const res = await request.post("/debts/simplified/settle", {
         debtsBwPeers: peers?.debtsBwPeers,
       });
       // console.log(res.data);
       window.location.relaod();
-      setLoading(false);
+      // setLoading(false);
     } catch (err) {
       console.log(err);
-      setLoading(false);
+      // setLoading(false);
     }
   };
 
