@@ -8,7 +8,8 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "devStart": "nodemon index.js"
+    "devStart": "nodemon index.js",
+    "start": "node index.js"
   },
   "keywords": [],
   "author": "",
