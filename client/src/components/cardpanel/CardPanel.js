@@ -45,6 +45,7 @@ const CardPanel = () => {
     <div className="cardpanel h-7-8 sm:mb-8 sm:mr-10 my-3 mx-2 p-4 bg-white rounded-lg overflow-y-scroll">
       <h2 className="text-left font-bold text-3xl">Dashboard</h2>
 
+      {/* POPUPS FOR SHOWING DETAILS OF LENDED AND BORROWED MONEY */}
       <ListPopUp
         title="To Recieve"
         open={showLended}
@@ -61,6 +62,8 @@ const CardPanel = () => {
       />
 
       <div className="summary flex sm:flex-row flex-col w-full items-center justify-evenly py-8 sm:mx-0 m-auto gap-4">
+        {/* CARD TO SHOW TOTAL LENDED AMOUNT */}
+
         <div
           className="lended hover:shadow-md flex flex-col justify-center sm:w-56 sm:h-48 p-4 h-32 w-52 bg-green-100 rounded-lg"
           onClick={() => showLended(true)}
@@ -72,6 +75,8 @@ const CardPanel = () => {
             {lendedData.total}
           </span>
         </div>
+
+        {/* CARD TO SHOW TOTAL BORROWED AMOUNT */}
 
         <div
           className="borrowed hover:shadow-md flex flex-col justify-center sm:w-56 sm:h-48 p-4 h-32 w-52 bg-red-200 rounded-lg"
@@ -86,6 +91,7 @@ const CardPanel = () => {
         </div>
       </div>
 
+      {/* OPTIMISED SETTLING */}
       <OptimisedSettle />
     </div>
   );

@@ -39,11 +39,15 @@ const GroupPage = () => {
     <div className="users bg-neutral-300 h-screen w-screen  flex">
       <Sidebar />
 
-      {/* MODALS */}
+      {/* MODAL FOR CREATING NEW EXPENSE */}
       {open && <CreateExpModal open={open} setOpen={setOpen} data={data} />}
+
+      {/* MODAL FOR ADDING NEW MEMBER */}
       {memModal && (
         <AddMemModal open={memModal} setOpen={setMembersOpen} data={data} />
       )}
+
+      {/* MODAL FOR REMOVING EXISTING MEMBER */}
       {removeModal && (
         <RemoveMemsModal
           open={removeModal}
@@ -67,6 +71,8 @@ const GroupPage = () => {
           {expenseData && <GroupExpenses expenseData={expenseData} />}
 
           <div className="controls flex justify-evenly items-center mt-8">
+            {/* CREATE NEW EXPENSE */}
+
             <button
               className="new-expense font-bold text-lg hover:shadow-md flex flex-col justify-center sm:w-56 sm:h-20 h-12 p-4 bg-slate-600 rounded-lg w-32 text-slate-50 items-center"
               onClick={() => {
@@ -76,6 +82,7 @@ const GroupPage = () => {
               New Expense
             </button>
 
+            {/* ADD NEW MEMBER */}
             <button
               className="new-expense font-bold text-lg hover:shadow-md flex flex-col justify-center sm:w-56 sm:h-20 h-12 p-4 bg-slate-600 rounded-lg w-32 text-slate-50 items-center"
               onClick={() => {
@@ -85,6 +92,7 @@ const GroupPage = () => {
               Add Members
             </button>
 
+            {/* REMOVE EXISTING MEMBER */}
             <button
               className="new-expense font-bold text-lg hover:shadow-md flex flex-col justify-center sm:w-56 sm:h-20 h-12 p-4 bg-red-600 rounded-lg w-32 text-slate-50 items-center"
               onClick={() => {

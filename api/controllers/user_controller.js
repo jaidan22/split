@@ -10,6 +10,7 @@ const getUsers = async (req, res) => {
   }
 };
 
+// LIST OF USERS WITH PREVIOUS TRANSACTION HISTORY
 const previous = async (req, res) => {
   try {
     const borrowers = await Debt.find(

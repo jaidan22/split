@@ -2,6 +2,7 @@ const User = require("../models/User");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
+// LOGIN CONTROLLER
 const login = async (req, res) => {
   try {
     const user = await User.findOne({ username: req.body.username });
@@ -36,6 +37,7 @@ const login = async (req, res) => {
   }
 };
 
+// SIGN UP CONTROLLER
 const signup = async (req, res) => {
   try {
     const salt = bcrypt.genSaltSync(10);
@@ -56,6 +58,7 @@ const signup = async (req, res) => {
   }
 };
 
+// LOGOUT CONTROLLER
 const logout = (req, res) => {
   res
     .clearCookie("accessToken", {

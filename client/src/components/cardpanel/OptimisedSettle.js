@@ -67,6 +67,8 @@ const OptimisedSettle = () => {
     <div className="optimised-settle mt-4">
       <div className="title flex">
         <h2 className="text-left font-bold text-xl">Optimised Settle</h2>
+
+        {/* ACTIVATE OPTIMISED SETTLING */}
         {peers.length != 0 && (
           <label class="switch ml-4">
             <input
@@ -82,6 +84,7 @@ const OptimisedSettle = () => {
 
       <div className="cards flex mt-4 w-full flex-col justify-evenly gap-4">
         {/* REQUIRED TRANSACTIONS */}
+
         {minTrxns.length != 0 && (
           <div className="mintxns flex flex-col space-x-0 justify-center items-center p-4 bg-purple-200 rounded-lg  w-full  h-full grow-2">
             <span className="font-bold"> Minimum Transactions</span>
@@ -93,20 +96,24 @@ const OptimisedSettle = () => {
             {minTrxns.map((t) => (
               <div className="txn flex justify-evenly w-full py-1 gap-4 border-b-2 border-slate-400">
                 <li className="list-none text-left w-20 flex items-center gap-1">
-                  <img className="h-8"
+                  <img
+                    className="h-8"
                     src={`https://api.dicebear.com/5.x/avataaars/svg?seed=${t.from}`}
                     alt=""
                   />
                   {t.from}
                 </li>
                 <li className="list-none text-left w-20 flex items-center gap-1">
-                  <img className="h-8"
+                  <img
+                    className="h-8"
                     src={`https://api.dicebear.com/5.x/avataaars/svg?seed=${t.to}`}
                     alt=""
                   />
                   {t.to}
                 </li>
-                <li className="list-none text-left w-20 flex items-center gap-1">{t.amount}</li>
+                <li className="list-none text-left w-20 flex items-center gap-1">
+                  {t.amount}
+                </li>
               </div>
             ))}
             <button
@@ -120,6 +127,7 @@ const OptimisedSettle = () => {
 
         <div className="cards flex mt-4 w-full sm:flex-row flex-col justify-evenly gap-4">
           {/* LIST OF PEERS */}
+
           {peers.length != 0 && (
             <div className="peers w-full flex flex-col space-x-0 justify-start pt-4 bg-indigo-200 rounded-lg h-full grow-1">
               <span className="font-bold"> Peers</span>
@@ -144,6 +152,7 @@ const OptimisedSettle = () => {
           )}
 
           {/* DEBTS */}
+
           {peers.length != 0 && (
             <div className="debts flex flex-col space-x-0 justify-center p-4 bg-blue-100 rounded-lg w-full h-full grow-2">
               <span className="font-bold"> Debts between Peers</span>

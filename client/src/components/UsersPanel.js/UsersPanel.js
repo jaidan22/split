@@ -36,6 +36,8 @@ const UsersPanel = () => {
     <div className="userspanel h-7-8 sm:mb-8 sm:mr-10 my-3 mx-2 p-4 bg-white rounded-lg relative">
       <h2 className="text-left font-bold text-3xl">Users</h2>
       <List>
+        {/* LIST OF USERS WITH TRANSACTION HISTORY */}
+
         {data?.map((d) => {
           return (
             <ListItem>
@@ -53,6 +55,7 @@ const UsersPanel = () => {
             </ListItem>
           );
         })}
+
         {data.length == 0 && (
           <span>
             No users found ! <br />

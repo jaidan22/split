@@ -37,6 +37,7 @@ const GroupPanel = () => {
   return (
     <div className="grouppanel h-7-8 sm:mb-8 sm:mr-10 my-3 mx-2 p-4 bg-white rounded-lg relative">
       {/* NEW GROUP MODAL */}
+
       <NewGroupModal open={open} setOpen={setOpen} />
 
       <h2 className="text-left font-bold text-3xl">Groups</h2>
@@ -60,6 +61,8 @@ const GroupPanel = () => {
         })}
         {data.length == 0 && <span>No groups Found</span>}
       </List>
+
+      {/* CREATE NEW GROUP */}
       <div className="controls flex justify-evenly items-center mt-8">
         <button
           className="new-expense font-bold text-lg hover:shadow-md flex flex-col justify-center sm:w-56 sm:h-20 h-12 p-4 bg-slate-600 rounded-lg w-auto text-slate-50 items-center"

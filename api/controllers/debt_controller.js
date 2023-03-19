@@ -2,6 +2,7 @@ const Debt = require("../models/Debt");
 const Group = require("../models/Group");
 const User = require("../models/User");
 
+// GET DETAILS OF A SINGLE DEBT
 const getDebt = async (req, res) => {
   try {
     const debt = await Debt.findOne({ _id: req.params.id });
@@ -11,6 +12,7 @@ const getDebt = async (req, res) => {
   }
 };
 
+// GET LIST OF ALL DEBTS
 const getDebts = async (req, res) => {
   try {
     const debts = await Debt.find();
@@ -20,6 +22,7 @@ const getDebts = async (req, res) => {
   }
 };
 
+// GET LIST OF ALL DEBTS B/W 2 USERS
 const getDebtBwUsers = async (req, res) => {
   try {
     const debts = await Debt.find({
@@ -33,6 +36,7 @@ const getDebtBwUsers = async (req, res) => {
   }
 };
 
+// GET LIST OF PEERS, TRANSACTIONS AND NET DEBT
 const getPeers = async (req, res) => {
   try {
     const borrowers = await Debt.find(
@@ -90,6 +94,7 @@ const getPeers = async (req, res) => {
   }
 };
 
+// VIEW SIMPLIFIED DEBTS
 const getSimplifiedDebts = async (req, res) => {
   try {
     const netDebt = req.body.netDebt;
@@ -99,6 +104,12 @@ const getSimplifiedDebts = async (req, res) => {
     const l = netDebt.length;
 
     // LOGIC FOR SIMPLIFIED SETTLING
+        // 1. Sort users according to their net Debt (-ve debt => to recieve)
+        // 2. if first or last index of netDebt is 0, return netDebt (since sum of net debt of peers will be zero)
+        // 3. Add new record to transaction object
+        // 3. Add the highest +ve value to the highest -ve value
+        // 5. Goto 1
+    
     for (; netDebt[0].netDebt != 0 && netDebt[l - 1].netDebt != 0; ) {
       transactions.push({
         from: netDebt[0].name,
@@ -117,6 +128,7 @@ const getSimplifiedDebts = async (req, res) => {
   }
 };
 
+// SETTLE SIMPLIFIED DEBTS
 const settleSimplifiedDebts = async (req, res) => {
   try {
     const debtsBwPeers = req.body.debtsBwPeers;

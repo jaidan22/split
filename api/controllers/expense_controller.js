@@ -19,6 +19,7 @@ const getExpense = async (req, res) => {
   }
 };
 
+// WHILE ADDING EXPENSE RECORDS FOR DEBTS ARE ALSO CREATED WITH LENDER AND EACH BORROWER
 const addExpense = async (req, res) => {
   try {
     let borrowers = req.body.borrowers;
@@ -58,6 +59,7 @@ const addExpense = async (req, res) => {
   }
 };
 
+// WHILE SETTLING EXPENSE RECORDS, DEBTS ARE ALSO SETTLED
 const settleExpense = async (req, res) => {
   try {
     const expense = await Expense.updateOne(

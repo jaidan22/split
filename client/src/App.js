@@ -24,6 +24,8 @@ function App() {
       {loading && <Loading />}
       <Router>
         <Routes>
+          {/* PROTECTED ROUTES - AVAILABLE ONLY AFTER LOGIN */}
+
           <Route element={<PrivateRoutes />}>
             <Route path="/" element={<DashBoard />} />
             <Route path="/users" element={<Users />} />
