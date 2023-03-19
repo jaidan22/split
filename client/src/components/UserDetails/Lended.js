@@ -13,6 +13,7 @@ const Lended = ({ data }) => {
       setLoading(false);
       window.location.reload();
     } catch (err) {
+      setLoading(false);
       console.log(err);
     }
   };

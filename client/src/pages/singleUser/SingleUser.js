@@ -53,13 +53,14 @@ const SingleUser = () => {
             `/debts/bw/${res.data.username}`
           );
           setTransactions(transactions.data);
+          setLoading(false);
         })
         .catch((err) => {
           console.log(err);
+          setLoading(false);
         });
     };
     getData();
-    setLoading(false);
   }, []);
 
   return (

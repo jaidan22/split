@@ -20,6 +20,7 @@ const ExpenseCard = ({ data, borrower, lender }) => {
       window.location.reload();
     } catch (err) {
       console.log(err);
+      setLoading(false);
     }
   };
 

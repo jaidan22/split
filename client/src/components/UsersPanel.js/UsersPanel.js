@@ -22,11 +22,12 @@ const UsersPanel = () => {
         .then((res) => {
           console.log(res.data);
           setData(res.data);
+          setLoading(false);
         })
         .catch((err) => {
           console.log(err);
+          setLoading(false);
         });
-      setLoading(false);
     };
     getData();
   }, []);

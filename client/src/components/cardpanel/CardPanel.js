@@ -30,12 +30,13 @@ const CardPanel = () => {
         .then((res) => {
           setBorrowedData(res.data);
           // console.log(res.data);
+          setLoading(false);
         })
         .catch((err) => {
           console.log(err);
           // if (err.response.status == 401) logout();
+          setLoading(false);
         });
-      setLoading(false);
     };
     getData();
   }, []);

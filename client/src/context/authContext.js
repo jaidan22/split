@@ -20,11 +20,12 @@ export const AuthContextProvider = ({ children }) => {
         }
       );
       setCurrentUser(res.data);
+      setLoading(false);
     } catch (err) {
       alert(err.response.data);
+      setLoading(false);
       console.log(err);
     }
-    setLoading(false);
   };
 
   const logout = async () => {
