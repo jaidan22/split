@@ -61,6 +61,6 @@ npm start
 
 ####
 
-- Frontend Hosted in <a href='https://wisebillsplit.netlify.app'>Netlify </a>
+- Frontend Hosted in <a href='https://wisebillsplit.vercel.app'>Netlify </a>
 - Backend Hosted in <a href='https://test-split-api.vercel.app'>Vercel</a>
 - <a href="https://drive.google.com/file/d/1ZzQ7Y7nPCsUBBJ_OmEloPDAvLvanmIWf/view?usp=share_link">Link</a> to Demo Video

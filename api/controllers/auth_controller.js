@@ -27,6 +27,8 @@ const login = async (req, res) => {
     res
       .cookie("accessToken", token, {
         httpOnly: true,
+        domain: ".vercel.app",
+        path: "/",
       })
       .status(200)
       .json(user);

@@ -9,6 +9,7 @@ const debtRoute = require("./routes/debt");
 const expenseRoute = require("./routes/expense");
 const authRoute = require("./routes/auth");
 const groupRoute = require("./routes/group");
+const { endpoints } = require("./endpoints");
 
 mongoose
   .connect(process.env.DB_URL)
@@ -18,12 +19,11 @@ mongoose
 //middleware
 app.use(express.json());
 
-
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Credentials", true);
   res.setHeader(
     "Access-Control-Allow-Origin",
-    "https://wisebillsplit.netlify.app/*"
+    "https://wisebillsplit.vercel.app"
   );
   res.setHeader(
     "Access-Control-Allow-Methods",
@@ -49,7 +49,7 @@ app.use("/api", groupRoute);
 app.use("/api/auth", authRoute);
 
 app.get("/", async (req, res) => {
-  res.send({ message: "Server Running" });
+  res.send(endpoints);
 });
 
 app.listen(process.env.PORT || 8800, () => {
