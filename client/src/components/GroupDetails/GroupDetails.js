@@ -3,26 +3,15 @@ import { request } from "../../axios";
 import { AuthContext } from "../../context/authContext";
 import ExpenseCard from "./ExpenseCard";
 
-const GroupExpenses = ({ data }) => {
+const GroupExpenses = ({ expenseData }) => {
   const { currentUser, setLoading } = useContext(AuthContext);
-  const [expenseData, setExpense] = useState();
   const [scrolling, setScrolling] = useState(true);
   const eofRef = useRef();
 
   useEffect(() => {
-    const getTData = async () => {
-      setLoading(true);
-      try {
-        const expenses = await request.get(`/group/expenses/${data._id}`);
-        setExpense(expenses.data);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    getTData();
     setLoading(false);
     scrolling && eofRef.current?.scrollIntoView({ behavior: "smooth" });
-  });
+  },[]);
 
   return (
     <div

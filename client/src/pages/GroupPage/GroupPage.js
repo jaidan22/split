@@ -17,6 +17,7 @@ const GroupPage = () => {
   const [memModal, setMembersOpen] = useState(false);
   const [removeModal, setRemoveOpen] = useState(false);
   const [data, setData] = useState([]);
+  const [expenseData, setExpense] = useState();
 
   // GET GROUP DATA
   useEffect(() => {
@@ -25,6 +26,8 @@ const GroupPage = () => {
         const res = await request.get(`/group/${id}`);
         // console.log(res.data);
         setData(res.data);
+        const expenses = await request.get(`/group/expenses/${res.data._id}`);
+        setExpense(expenses.data);
       } catch (err) {
         console.log(err);
       }
@@ -61,7 +64,7 @@ const GroupPage = () => {
             <h2>{data.groupname}</h2>
           </div>
 
-          {data && <GroupExpenses data={data} />}
+          {expenseData && <GroupExpenses expenseData={expenseData} />}
 
           <div className="controls flex justify-evenly items-center mt-8">
             <button

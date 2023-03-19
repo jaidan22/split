@@ -23,7 +23,7 @@ const CardPanel = () => {
         })
         .catch((err) => {
           console.log(err);
-          if (err.response.status == 401) logout();
+          // if (err.response.status == 401) logout();
         });
       request
         .get(`/owed`)
@@ -33,7 +33,7 @@ const CardPanel = () => {
         })
         .catch((err) => {
           console.log(err);
-          if (err.response.status == 401) logout();
+          // if (err.response.status == 401) logout();
         });
       setLoading(false);
     };

@@ -14,6 +14,7 @@ const SingleUser = () => {
   const [data, setData] = useState([]);
   const [amount, setAmount] = useState(0);
   const [open, setOpen] = useState(false);
+  const [transactoinData, setTransactions] = useState();
 
   const settleAll = async () => {
     try {
@@ -48,6 +49,10 @@ const SingleUser = () => {
         .get(`/user/${username}`)
         .then(async (res) => {
           setData(res.data);
+          const transactions = await request.get(
+            `/debts/bw/${res.data.username}`
+          );
+          setTransactions(transactions.data);
         })
         .catch((err) => {
           console.log(err);
@@ -55,7 +60,7 @@ const SingleUser = () => {
     };
     getData();
     setLoading(false);
-  });
+  }, []);
 
   return (
     <div className="users bg-neutral-300 h-screen w-screen  flex">
@@ -73,7 +78,7 @@ const SingleUser = () => {
             <h2>{data.name}</h2>
           </div>
 
-          {data && <UserDetails user={data} />}
+          {transactoinData && <UserDetails transactoinData={transactoinData} />}
 
           <div className="controls flex justify-evenly items-center mt-8">
             <button

@@ -5,31 +5,15 @@ import Borrowed from "./Borrowed";
 import Lended from "./Lended";
 import "./userDetails.scss";
 
-const UserDetails = ({ user }) => {
+const UserDetails = ({ transactoinData }) => {
   const { currentUser, setLoading } = useContext(AuthContext);
-  const [transactoinData, setTransactions] = useState();
   const [scrolling, setScrolling] = useState(true);
   const eofRef = useRef();
 
-  // window.onload(eofRef.current?.scrollIntoView())
-  //   window.addEventListener("load", () => {
-  //     eofRef.current?.scrollIntoView();
-  //   });
-
   useEffect(() => {
-    const getTData = async () => {
-      setLoading(true);
-      try {
-        const transactions = await request.get(`/debts/bw/${user.username}`);
-        setTransactions(transactions.data);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    getTData();
     setLoading(false);
     scrolling && eofRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [transactoinData]);
+  }, []);
 
   return (
     <div
