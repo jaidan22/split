@@ -45,9 +45,6 @@ const SingleUser = () => {
   useEffect(() => {
     const getData = async () => {
       // setLoading(true);
-
-      // DETAILS OF A SINGLE USER
-
       request
         .get(`/user/${username}`)
         .then(async (res) => {
@@ -85,9 +82,6 @@ const SingleUser = () => {
           {transactoinData && <UserDetails transactoinData={transactoinData} />}
 
           <div className="controls flex justify-evenly items-center mt-8">
-
-            {/* BUTTONS FOR SETTLING AND ADDING NEW DEBT */}
-
             <button
               className="settle-all font-bold text-lg hover:shadow-md flex flex-col justify-center sm:w-56 sm:h-20 h-12 p-4 bg-slate-600 rounded-lg w-32 text-slate-50 items-center"
               onClick={settleAll}
@@ -102,8 +96,6 @@ const SingleUser = () => {
             >
               + New
             </button>
-
-            {/* POPUP FOR ENTERING AMOUNT */}
 
             <Modal
               open={open}

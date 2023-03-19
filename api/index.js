@@ -10,19 +10,21 @@ const expenseRoute = require("./routes/expense");
 const authRoute = require("./routes/auth");
 const groupRoute = require("./routes/group");
 
-// CONNECT WITH DB
 mongoose
   .connect(process.env.DB_URL)
   .then(() => console.log("DB connected successfully"))
   .catch((err) => console.log(err));
 
-// middleware
+//middleware
 app.use(express.json());
 
-// CORS
+
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Credentials", true);
-  res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
+  res.setHeader(
+    "Access-Control-Allow-Origin",
+    "https://wisebillsplit.netlify.app/*"
+  );
   res.setHeader(
     "Access-Control-Allow-Methods",
     "GET,OPTIONS,PATCH,DELETE,POST,PUT"
@@ -40,7 +42,6 @@ app.use((req, res, next) => {
 
 app.use(cookieParser());
 
-// ROUTES
 app.use("/api", userRoute);
 app.use("/api", expenseRoute);
 app.use("/api", debtRoute);
