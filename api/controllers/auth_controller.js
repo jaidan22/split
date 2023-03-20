@@ -27,8 +27,10 @@ const login = async (req, res) => {
     res
       .cookie("accessToken", token, {
         httpOnly: true,
-        domain: ".vercel.app",
+        domain: ".jaidan22.vercel.app",
         path: "/",
+        sameSite: "none",
+        secure: true,
       })
       .status(200)
       .json(user);

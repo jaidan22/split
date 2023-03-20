@@ -1,4 +1,4 @@
-export const endpoints = {
+const endpoints = {
   paths: [
     {
       title: "sign up",
@@ -111,3 +111,5 @@ export const endpoints = {
     },
   ],
 };
+
+module.exports = { endpoints };
