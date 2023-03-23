@@ -1,5 +1,5 @@
 import { Modal } from "@mui/material";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { request } from "../../axios";
 
 const RemoveMemsModal = ({ open, setOpen, data }) => {
@@ -38,15 +38,11 @@ const RemoveMemsModal = ({ open, setOpen, data }) => {
   };
 
   useEffect(() => {
-    console.log(dltusers);
-  }, [dltusers]);
-
-  useEffect(() => {
     const getData = async () => {
       try {
         const res = await request.get("/users");
         const existingUsers = res.data.filter((x) =>
-          data.users.includes(x.username)
+          data.users?.includes(x.username)
         );
         setUsers(existingUsers);
       } catch (err) {

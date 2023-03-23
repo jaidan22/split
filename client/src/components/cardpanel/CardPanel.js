@@ -6,7 +6,7 @@ import "./cardpanel.scss";
 import OptimisedSettle from "./OptimisedSettle";
 
 const CardPanel = () => {
-  const { currentUser, loading, setLoading, logout } = useContext(AuthContext);
+  const { setLoading } = useContext(AuthContext);
   const [lended, showLended] = useState(false);
   const [borrowed, showBorrowed] = useState(false);
   const [lendedData, setLendedData] = useState([]);
@@ -14,12 +14,11 @@ const CardPanel = () => {
 
   useEffect(() => {
     const getData = async () => {
-      // setLoading(true);
+      setLoading(true);
       request
         .get(`${process.env.REACT_APP_API_URL}/lended`)
         .then((res) => {
           setLendedData(res.data);
-          // console.log(res.data);
         })
         .catch((err) => {
           console.log(err);
@@ -30,13 +29,12 @@ const CardPanel = () => {
         .then((res) => {
           setBorrowedData(res.data);
           // console.log(res.data);
-          // setLoading(false);
         })
         .catch((err) => {
           console.log(err);
           // if (err.response.status == 401) logout();
-          // setLoading(false);
         });
+      setLoading(false);
     };
     getData();
   }, []);

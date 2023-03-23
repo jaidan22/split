@@ -1,5 +1,4 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
-import { request } from "../../axios";
 import { AuthContext } from "../../context/authContext";
 import ExpenseCard from "./ExpenseCard";
 
@@ -8,10 +7,12 @@ const GroupExpenses = ({ expenseData }) => {
   const [scrolling, setScrolling] = useState(true);
   const eofRef = useRef();
 
-  useEffect(() => {
-    // setLoading(false);
+useEffect(() => {
+  setTimeout(() => {
     scrolling && eofRef.current?.scrollIntoView({ behavior: "smooth" });
-  },[]);
+    setLoading(false);
+  }, 500);
+}, []);
 
   return (
     <div

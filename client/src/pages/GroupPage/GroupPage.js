@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { request } from "../../axios";
 import AddMemModal from "../../components/ExpenseModals/AddMembersModal";
@@ -11,7 +11,7 @@ import { AuthContext } from "../../context/authContext";
 
 // Group Page
 const GroupPage = () => {
-  const { setLoading, currentUser } = useContext(AuthContext);
+  const { setLoading } = useContext(AuthContext);
   const { id } = useParams();
   const [open, setOpen] = useState(false);
   const [memModal, setMembersOpen] = useState(false);
@@ -21,16 +21,20 @@ const GroupPage = () => {
 
   // GET GROUP DATA
   useEffect(() => {
-    const getData = async () => {
-      try {
-        const res = await request.get(`/group/${id}`);
-        // console.log(res.data);
-        setData(res.data);
-        const expenses = await request.get(`/group/expenses/${res.data._id}`);
-        setExpense(expenses.data);
-      } catch (err) {
-        console.log(err);
-      }
+    const getData = () => {
+      setLoading(true);
+      request
+        .get(`/group/${id}`)
+        .then((res) => {
+          setData(res.data);
+          return res.data;
+        })
+        .then((data) => request.get(`/group/expenses/${data._id}`))
+        .then((expenses) => {
+          setExpense(expenses.data);
+        })
+        .catch((err) => console.log(err));
+      setLoading(false);
     };
     getData();
   }, []);
@@ -64,7 +68,7 @@ const GroupPage = () => {
             <h2>{data.groupname}</h2>
           </div>
 
-          {expenseData && <GroupExpenses expenseData={expenseData} />}
+          {<GroupExpenses expenseData={expenseData} />}
 
           <div className="controls flex justify-evenly items-center mt-8">
             <button

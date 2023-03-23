@@ -1,5 +1,4 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
-import { request } from "../../axios";
 import { AuthContext } from "../../context/authContext";
 import Borrowed from "./Borrowed";
 import Lended from "./Lended";
@@ -11,8 +10,10 @@ const UserDetails = ({ transactoinData }) => {
   const eofRef = useRef();
 
   useEffect(() => {
-    // setLoading(false);
-    scrolling && eofRef.current?.scrollIntoView({ behavior: "smooth" });
+    setTimeout(() => {
+      scrolling && eofRef.current?.scrollIntoView({ behavior: "smooth" });
+      setLoading(false);
+    }, 500);
   }, []);
 
   return (
@@ -23,10 +24,10 @@ const UserDetails = ({ transactoinData }) => {
       }}
     >
       {transactoinData?.map((t) => {
-        if (t.lender == currentUser.username) return <Lended data={t} />;
+        if (t.lender === currentUser.username) return <Lended data={t} />;
         else return <Borrowed data={t} />;
       })}
-      {transactoinData?.length == 0 && <span>No Expenses Found !</span>}
+      {transactoinData?.length === 0 && <span>No Expenses Found !</span>}
 
       <div ref={eofRef} />
     </div>

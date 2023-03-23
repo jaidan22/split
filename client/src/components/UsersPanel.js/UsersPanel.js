@@ -16,18 +16,17 @@ const UsersPanel = () => {
 
   useEffect(() => {
     const getData = async () => {
-      // setLoading(true);
+      setLoading(true);
       request
         .get("/previous")
         .then((res) => {
           console.log(res.data);
           setData(res.data);
-          // setLoading(false);
         })
         .catch((err) => {
           console.log(err);
-          // setLoading(false);
         });
+      setLoading(false);
     };
     getData();
   }, []);
@@ -53,7 +52,7 @@ const UsersPanel = () => {
             </ListItem>
           );
         })}
-        {data.length == 0 && (
+        {data.length === 0 && (
           <span>
             No users found ! <br />
             Search to find users and start tracking expenses

@@ -23,7 +23,7 @@ const NewGroupModal = ({ open, setOpen }) => {
   };
 
   const addMems = async () => {
-    if (newusers.length == 0) {
+    if (newusers.length === 0) {
       alert("Select atleast one user");
       return;
     } else if (grpname == "") {
@@ -41,10 +41,6 @@ const NewGroupModal = ({ open, setOpen }) => {
       console.log(err);
     }
   };
-
-  useEffect(() => {
-    console.log(newusers);
-  }, [newusers]);
 
   useEffect(() => {
     const getData = async () => {
@@ -103,8 +99,8 @@ const NewGroupModal = ({ open, setOpen }) => {
                 id={d.username}
                 name={d.name}
                 type="checkbox"
-                defaultChecked={currentUser.username == d.username}
-                disabled={currentUser.username == d.username}
+                defaultChecked={currentUser.username === d.username}
+                disabled={currentUser.username === d.username}
                 value={d.username}
                 required
                 onChange={handleChange}

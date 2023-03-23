@@ -13,7 +13,7 @@ import Groups from "./pages/Groups/Groups";
 import GroupPage from "./pages/GroupPage/GroupPage";
 
 function App() {
-  const { currentUser, loading, setLoading } = useContext(AuthContext);
+  const { currentUser, loading } = useContext(AuthContext);
 
   const PrivateRoutes = () => {
     return currentUser ? <Outlet /> : <Navigate to="/login" />;
@@ -22,6 +22,8 @@ function App() {
   const RedirectRoutes = () => {
     return !currentUser ? <Outlet /> : <Navigate to="/" />;
   };
+
+  if (loading) return <Loading />;
 
   return (
     <div className="App">

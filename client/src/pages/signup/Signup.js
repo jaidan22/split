@@ -16,17 +16,16 @@ const Signup = () => {
     setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post(
-        `${process.env.REACT_APP_API_URL}/auth/signup`,
-        inputs,
-        {
+      axios
+        .post(`${process.env.REACT_APP_API_URL}/auth/signup`, inputs, {
           withCredentials: true,
-        }
-      );
-      navigate("/login");
+        })
+        .then(() => {
+          navigate("/login");
+        });
     } catch (err) {
       console.log(err);
     }

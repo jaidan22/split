@@ -44,21 +44,19 @@ const SingleUser = () => {
 
   useEffect(() => {
     const getData = async () => {
-      // setLoading(true);
+      setLoading(true);
       request
         .get(`/user/${username}`)
-        .then(async (res) => {
+        .then((res) => {
           setData(res.data);
-          const transactions = await request.get(
-            `/debts/bw/${res.data.username}`
-          );
-          setTransactions(transactions.data);
-          // setLoading(false);
+          return res.data;
         })
+        .then((data) => request.get(`/debts/bw/${data.username}`))
+        .then((res) => setTransactions(res.data))
         .catch((err) => {
           console.log(err);
-          // setLoading(false);
         });
+      setLoading(false);
     };
     getData();
   }, []);
@@ -79,7 +77,7 @@ const SingleUser = () => {
             <h2>{data.name}</h2>
           </div>
 
-          {transactoinData && <UserDetails transactoinData={transactoinData} />}
+          {<UserDetails transactoinData={transactoinData} />}
 
           <div className="controls flex justify-evenly items-center mt-8">
             <button
