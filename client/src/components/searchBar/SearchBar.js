@@ -51,7 +51,14 @@ const SearchBar = () => {
   }, []);
 
   return (
-    <div className="searchbar relative">
+    <div
+      className="searchbar relative"
+      onBlur={() =>
+        setTimeout(() => {
+          showResults("");
+        }, 500)
+      }
+    >
       <input
         type="text"
         name="search"

@@ -59,7 +59,7 @@ const SingleUser = () => {
       setLoading(false);
     };
     getData();
-  }, []);
+  }, [username]);
 
   return (
     <div className="users bg-neutral-300 h-screen w-screen  flex">
