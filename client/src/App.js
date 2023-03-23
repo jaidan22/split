@@ -19,9 +19,12 @@ function App() {
     return currentUser ? <Outlet /> : <Navigate to="/login" />;
   };
 
+  const RedirectRoutes = () => {
+    return !currentUser ? <Outlet /> : <Navigate to="/" />;
+  };
+
   return (
     <div className="App">
-      {loading && <Loading />}
       <Router>
         <Routes>
           <Route element={<PrivateRoutes />}>
@@ -31,8 +34,10 @@ function App() {
             <Route path="/groups" element={<Groups />} />
             <Route path="/groups/:id" element={<GroupPage />} />
           </Route>
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
+          <Route element={<RedirectRoutes />}>
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<Signup />} />
+          </Route>
         </Routes>
       </Router>
     </div>

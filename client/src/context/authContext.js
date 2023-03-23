@@ -12,25 +12,31 @@ export const AuthContextProvider = ({ children }) => {
   const login = async (inputs) => {
     // setLoading(true);
     try {
-      const res = await axios.post(
-        `${process.env.REACT_APP_API_URL}/auth/login`,
-        inputs,
-        {
-          withCredentials: true,
-        }
-      );
-      setCurrentUser(res.data);
+        const res = await axios.post(
+          `${process.env.REACT_APP_API_URL}/auth/login`,
+          inputs,
+          {
+            withCredentials: true,
+          }
+        );
+        setCurrentUser(res.data);
       // setLoading(false);
     } catch (err) {
       alert(err.response.data);
-      // setLoading(false);
       console.log(err);
     }
+    setLoading(false);
   };
 
   const logout = async () => {
     // setLoading(true);
-    await axios.post(`${process.env.REACT_APP_API_URL}/auth/logout`);
+    await axios.post(
+      `${process.env.REACT_APP_API_URL}/auth/logout`,
+      {},
+      {
+        withCredentials: true,
+      }
+    );
     setCurrentUser(null);
     // setLoading(false);
   };
