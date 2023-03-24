@@ -1,10 +1,12 @@
 import { Modal } from "@mui/material";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { request } from "../../axios";
+import { AuthContext } from "../../context/authContext";
 
 const AddMemModal = ({ open, setOpen, data }) => {
   const [users, setUsers] = useState([]);
   const [newusers, setNewUsers] = useState([]);
+  const { setLoading } = useContext(AuthContext);
 
   const handleChange = (e) => {
     // console.log(e);
@@ -20,7 +22,7 @@ const AddMemModal = ({ open, setOpen, data }) => {
   };
 
   const addMems = async () => {
-    if (newusers.length == 0) {
+    if (newusers.length === 0) {
       alert("Select atleast one user");
       return;
     }
@@ -37,19 +39,18 @@ const AddMemModal = ({ open, setOpen, data }) => {
   };
 
   useEffect(() => {
-    console.log(newusers);
-  }, [newusers]);
-
-  useEffect(() => {
     const getData = async () => {
+      setLoading(true);
       try {
         const res = await request.get("/users");
         const nonExistingUsers = res.data.filter(
-          (x) => !data.users.includes(x.username)
+          (x) => !data.users?.includes(x.username)
         );
         setUsers(nonExistingUsers);
+        setLoading(false);
       } catch (err) {
         console.log(err);
+        setLoading(false);
       }
     };
     getData();

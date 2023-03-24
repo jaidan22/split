@@ -30,7 +30,6 @@ const SearchBar = () => {
         else return null;
       });
       setSearchRes(result);
-      console.log(result);
       setOpen(true);
     }
   };
@@ -52,14 +51,20 @@ const SearchBar = () => {
   }, []);
 
   return (
-    <div className="searchbar relative">
+    <div
+      className="searchbar relative"
+      onBlur={() =>
+        setTimeout(() => {
+          showResults("");
+        }, 500)
+      }
+    >
       <input
         type="text"
         name="search"
         placeholder="Search"
         autoFocus={true}
         value={keyword}
-        onBlur={() => showResults("")}
         onChange={(e) => {
           showResults(e.target.value);
         }}
@@ -67,7 +72,10 @@ const SearchBar = () => {
       />
 
       {open && (
-        <div className="result-container absolute bg-gray-200 sm:right-4 sm:top-12 top-12 h-auto rounded-2xl">
+        <div
+          className="result-container absolute bg-gray-200 sm:right-4 sm:top-12 top-12 h-auto rounded-2xl"
+          // onBlur={() => showResults("")}
+        >
           {searchRes?.map((d) => (
             // <List>
             <ListItem>
