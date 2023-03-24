@@ -1,3 +1,116 @@
 .navLink:hover {
   box-shadow: 2px 2px rgb(168, 182, 198);
 }
+
+.bg {
+  display: none;
+}
+
+@media (max-width: 629px) {
+  .bg {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba($color: #000000, $alpha: 0.7);
+    z-index: 1111;
+    &.active-true {
+      display: block;
+    }
+    &.active-false {
+      display: none;
+    }
+  }
+
+  .sidebar {
+    transform: translateX(-200%);
+    height: 100vh;
+    z-index: 11111;
+    margin-left: 0;
+    width: 60vw;
+
+    &.active-true {
+      transform: translateX(0);
+      transition: transform 0.5s;
+    }
+    &.active-false {
+      transform: translateX(-200%);
+      transition: transform 0.5s;
+    }
+  }
+}
+
+// NAV MENU SANDWICH
+#menu-toggle-wrapper {
+  position: fixed;
+  top: 25px;
+  right: 50px;
+  width: 40px;
+  height: 40px;
+  z-index: 11111;
+  cursor: pointer;
+
+  #menu-toggle {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    font-size: 30px;
+    display: block;
+    margin-left: -15px;
+    width: 30px;
+    height: 3px;
+    background: #4078c0;
+  }
+
+  #menu-toggle:after,
+  #menu-toggle:before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 3px;
+    background: #4078c0;
+    left: 0;
+    -webkit-transform-origin: center center;
+    -moz-transform-origin: center center;
+    -ms-transform-origin: center center;
+    -o-transform-origin: center center;
+    transform-origin: center center;
+  }
+
+  #menu-toggle:before {
+    top: -8px;
+  }
+
+  #menu-toggle:after {
+    bottom: -8px;
+  }
+
+  &.active #menu-toggle {
+    background: 0 0;
+  }
+
+  &.active #menu-toggle:after {
+    -webkit-transform: rotate(-45deg) translate(2px, -8px);
+    -moz-transform: rotate(-45deg) translate(3px, -8px);
+    -ms-transform: rotate(-45deg) translate(3px, -8px);
+    -o-transform: rotate(-45deg) translate(3px, -8px);
+    transform: rotate(-45deg) translate(3px, -8px);
+  }
+
+  &.active #menu-toggle:before {
+    -webkit-transform: rotate(45deg) translate(4px, 9px);
+    -moz-transform: rotate(45deg) translate(3px, 8px);
+    -ms-transform: rotate(45deg) translate(3px, 8px);
+    -o-transform: rotate(45deg) translate(3px, 8px);
+    transform: rotate(45deg) translate(3px, 8px);
+  }
+
+  #menu-toggle,
+  #menu-toggle:after,
+  #menu-toggle:before {
+    -webkit-transition: all 0.3s cubic-bezier(0.585, -0.6, 0.43, 1.65);
+    -moz-transition: all 0.3s cubic-bezier(0.585, -0.6, 0.43, 1.65);
+    -ms-transition: all 0.3s cubic-bezier(0.585, -0.6, 0.43, 1.65);
+    -o-transition: all 0.3s cubic-bezier(0.585, -0.6, 0.43, 1.65);
+    transition: all 0.3s cubic-bezier(0.585, -0.6, 0.43, 1.65);
+  }
+}
