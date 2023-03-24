@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 @import url("https://fonts.googleapis.com/css2?family=Baloo+Tammudu+2:wght@500;600&family=Lobster&family=Montserrat:wght@200;300;400;500&family=Open+Sans:wght@300;400&family=Orbitron:wght@700&display=swap");
+
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
 body {
   margin: 0;
   font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI",

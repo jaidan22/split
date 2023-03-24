@@ -40,17 +40,17 @@ const AddMemModal = ({ open, setOpen, data }) => {
 
   useEffect(() => {
     const getData = async () => {
-      setLoading(true);
+      // setLoading(true);
       try {
         const res = await request.get("/users");
         const nonExistingUsers = res.data.filter(
           (x) => !data.users?.includes(x.username)
         );
         setUsers(nonExistingUsers);
-        setLoading(false);
+        // setLoading(false);
       } catch (err) {
         console.log(err);
-        setLoading(false);
+        // setLoading(false);
       }
     };
     getData();

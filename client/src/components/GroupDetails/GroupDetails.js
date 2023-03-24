@@ -11,7 +11,7 @@ useEffect(() => {
   setTimeout(() => {
     scrolling && eofRef.current?.scrollIntoView({ behavior: "smooth" });
     setLoading(false);
-  }, 500);
+  }, 1000);
 }, []);
 
   return (
