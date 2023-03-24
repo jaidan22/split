@@ -58,7 +58,7 @@ const getPeers = async (req, res) => {
     ];
 
     // USERNAME OF PEERS
-    const peers = [...new Set([...lIds, ...bIds, ...gIds])];
+    const peers = [...new Set([...lIds, ...bIds, ...gIds, req.user.username])];
 
     // TRANSACTIONS BETWEEN PEERS
     const debtsBwPeers = await Debt.find(
