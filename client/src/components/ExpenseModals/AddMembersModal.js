@@ -63,7 +63,7 @@ const AddMemModal = ({ open, setOpen, data }) => {
         setOpen(false);
       }}
     >
-      <div className="modal absolute top-1/2 left-1/2 bg-white p-8 rounded-2xl">
+      <div className="modal absolute top-1/2 left-1/2 bg-white p-8 rounded-2xl overflow-y-scroll">
         <h3 className="block text-left  text-black text-xl font-bold">
           Add Members
         </h3>

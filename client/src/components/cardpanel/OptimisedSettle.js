@@ -30,7 +30,7 @@ const OptimisedSettle = () => {
           debtsBwPeers: peers?.debtsBwPeers,
         })
         .then(() => {
-          window.location.relaod();
+          window.location.reload();
         })
         .catch((err) => console.log(err));
     } catch (err) {
