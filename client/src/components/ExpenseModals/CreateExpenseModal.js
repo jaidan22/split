@@ -72,12 +72,15 @@ const CreateExpModal = ({ open, setOpen, data }) => {
         setUsers((prev) => {
           const e = prev.findIndex((p) => p.includes(value));
           if (e > -1) {
-            prev[e] = [value, splitType == 0 ? amt : (amount * amt) / 100];
+            prev[e] = [
+              value,
+              splitType == 0 ? amt : Math.round(amount * amt) / 100,
+            ];
             return prev;
           } else
             return [
               ...prev,
-              [value, splitType == 0 ? amt : (amount * amt) / 100],
+              [value, splitType == 0 ? amt : Math.round(amount * amt) / 100],
             ];
         });
       } else {
@@ -147,6 +150,7 @@ const CreateExpModal = ({ open, setOpen, data }) => {
             id="amount"
             name="amount"
             type="number"
+            max={100000}
             value={amount}
             onChange={(e) => {
               setAmount(e.target.value);

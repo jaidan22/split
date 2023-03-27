@@ -51,6 +51,12 @@ const ExpenseCard = ({ data, borrower, lender }) => {
               />
             </span>
 
+            {data?.title && (
+              <span className="title text-lg text-red-800 flex justify-center">
+                {data.title}
+              </span>
+            )}
+
             <span className="amt text-red-800 font-bold sm:text-5xl text-3xl mt-4">
               {data?.amount}
             </span>
@@ -89,6 +95,12 @@ const ExpenseCard = ({ data, borrower, lender }) => {
               />
             </span>
 
+            {data?.title && (
+              <span className="title text-lg text-green-800 flex justify-center">
+                {data.title}
+              </span>
+            )}
+
             <span className="amt text-green-800 font-bold sm:text-5xl text-3xl mt-4 ">
               {data?.amount}
             </span>
@@ -122,8 +134,13 @@ const ExpenseCard = ({ data, borrower, lender }) => {
           <span className="title font-bold text-lg text-slate-800 mt-4 flex justify-center">
             Expense
           </span>
+          {data?.title && (
+            <span className="title text-lg text-slate-800 flex justify-center">
+              {data.title}
+            </span>
+          )}
 
-          <span className="amt text-slate-800 font-bold sm:text-5xl text-3xl mt-4">
+          <span className="amt text-slate-800 font-bold sm:text-5xl text-3xl my-4">
             {data?.amount}
           </span>
         </div>

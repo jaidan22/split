@@ -1,6 +1,10 @@
 const mongoose = require("mongoose");
 
 const DebtSchema = new mongoose.Schema({
+  title: {
+    type: String,
+    max: [50],
+  },
   lender: {
     type: String,
     max: [30],

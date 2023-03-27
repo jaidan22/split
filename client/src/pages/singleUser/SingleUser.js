@@ -12,6 +12,7 @@ const SingleUser = () => {
   const { setLoading, currentUser } = useContext(AuthContext);
   const { username } = useParams();
   const [data, setData] = useState([]);
+  const [title, setTitle] = useState();
   const [amount, setAmount] = useState(0);
   const [open, setOpen] = useState(false);
   const [transactoinData, setTransactions] = useState();
@@ -32,6 +33,7 @@ const SingleUser = () => {
         lender: currentUser.username,
         borrower: username,
         amount,
+        title,
       });
       // setLoading(false);
       window.location.reload();
@@ -103,8 +105,28 @@ const SingleUser = () => {
             >
               <div className="modal absolute top-1/2 left-1/2 bg-white p-8 rounded-2xl">
                 <label
+                  htmlFor="title"
+                  className="block text-left font-medium text-black text-xl mt-4"
+                >
+                  Expense Name
+                </label>
+                <div className="mt-1">
+                  <input
+                    id="title"
+                    name="title"
+                    type="text"
+                    value={title}
+                    onChange={(e) => {
+                      setTitle(e.target.value);
+                    }}
+                    autoComplete="text"
+                    required
+                    className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-lg mt-2 shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                  />
+                </div>
+                <label
                   htmlFor="amount"
-                  className="block text-left font-medium text-black text-2xl"
+                  className="block text-left font-medium text-black text-xl mt-4"
                 >
                   Enter Amount
                 </label>
@@ -113,6 +135,7 @@ const SingleUser = () => {
                     id="amount"
                     name="amount"
                     type="number"
+                    max={100000}
                     value={amount}
                     onChange={(e) => {
                       setAmount(e.target.value);

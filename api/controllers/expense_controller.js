@@ -29,6 +29,7 @@ const addExpense = async (req, res) => {
         if (req.user.username != b[0]) {
           const newDebt = new Debt({
             lender: req.user.username,
+            title: req.body.title,
             borrower: b[0],
             amount: b[1],
             group: req.body.group,

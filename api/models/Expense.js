@@ -4,7 +4,6 @@ const ExpenseSchema = new mongoose.Schema({
   title: {
     type: String,
     max: [50],
-    required: true,
   },
   creationDatetime: {
     type: Date,
