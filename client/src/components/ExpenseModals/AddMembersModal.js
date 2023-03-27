@@ -26,16 +26,13 @@ const AddMemModal = ({ open, setOpen, data }) => {
       alert("Select atleast one user");
       return;
     }
-    try {
-      const res = await request.put("/group/addUsers", {
+    await request
+      .put("/group/addUsers", {
         users: newusers,
         id: data._id,
-      });
-      window.location.reload();
-      console.log(res);
-    } catch (err) {
-      console.log(err);
-    }
+      })
+      .then(() => window.location.reload())
+      .catch((err) => console.log(err));
   };
 
   useEffect(() => {

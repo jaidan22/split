@@ -170,6 +170,7 @@ const addDebt = async (req, res) => {
   try {
     const newDebt = new Debt({
       lender: req.user.username,
+      title: req.body.title,
       borrower: req.body.borrower,
       amount: req.body.amount,
       group: req.body.group,
@@ -190,6 +191,7 @@ const editDebt = async (req, res) => {
       {
         $set: {
           lender: req.user.username,
+          title: req.body.title,
           borrower: req.body.borrower,
           amount: req.body.amount,
           group: req.body.group,

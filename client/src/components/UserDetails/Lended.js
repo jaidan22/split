@@ -30,6 +30,12 @@ const Lended = ({ data }) => {
           Lended
         </span>
 
+        {data?.title && (
+          <span className="title text-lg text-green-800 flex justify-center">
+            {data.title}
+          </span>
+        )}
+
         <span className="amt text-green-800 font-bold sm:text-5xl text-3xl mt-4 ">
           {data?.amount}
         </span>

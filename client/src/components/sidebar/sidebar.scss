@@ -10,7 +10,7 @@
   .bg {
     position: fixed;
     width: 100vw;
-    height: 100vh;
+    height: 100%;
     background-color: rgba($color: #000000, $alpha: 0.7);
     z-index: 1111;
     &.active-true {
@@ -23,7 +23,7 @@
 
   .sidebar {
     transform: translateX(-200%);
-    height: 100vh;
+    height: 100%;
     z-index: 11111;
     margin-left: 0;
     width: 60vw;
@@ -41,7 +41,7 @@
 
 // NAV MENU SANDWICH
 #menu-toggle-wrapper {
-  position: fixed;
+  position: absolute;
   top: 25px;
   right: 50px;
   width: 40px;
@@ -58,7 +58,7 @@
     margin-left: -15px;
     width: 30px;
     height: 3px;
-    background: #4078c0;
+    background: #51565d;
   }
 
   #menu-toggle:after,
@@ -67,7 +67,7 @@
     position: absolute;
     width: 100%;
     height: 3px;
-    background: #4078c0;
+    background: #51565d;
     left: 0;
     -webkit-transform-origin: center center;
     -moz-transform-origin: center center;
@@ -89,6 +89,7 @@
   }
 
   &.active #menu-toggle:after {
+    background: #fff;
     -webkit-transform: rotate(-45deg) translate(2px, -8px);
     -moz-transform: rotate(-45deg) translate(3px, -8px);
     -ms-transform: rotate(-45deg) translate(3px, -8px);
@@ -97,6 +98,7 @@
   }
 
   &.active #menu-toggle:before {
+    background: #fff;
     -webkit-transform: rotate(45deg) translate(4px, 9px);
     -moz-transform: rotate(45deg) translate(3px, 8px);
     -ms-transform: rotate(45deg) translate(3px, 8px);
