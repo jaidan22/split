@@ -7,12 +7,12 @@ const GroupExpenses = ({ expenseData }) => {
   const [scrolling, setScrolling] = useState(true);
   const eofRef = useRef();
 
-useEffect(() => {
-  setTimeout(() => {
-    scrolling && eofRef.current?.scrollIntoView({ behavior: "smooth" });
-    setLoading(false);
-  }, 1000);
-}, []);
+  useEffect(() => {
+    setTimeout(() => {
+      scrolling && eofRef.current?.scrollIntoView({ behavior: "smooth" });
+      setLoading(false);
+    }, 1000);
+  }, []);
 
   return (
     <div
@@ -25,7 +25,8 @@ useEffect(() => {
         const borrowed = t.borrowers
           .map((b) => b.includes(currentUser.username))
           .includes(true);
-        if (borrowed) return <ExpenseCard data={t} borrower={true} />;
+        if (borrowed && t.lender != currentUser.username)
+          return <ExpenseCard data={t} borrower={true} />;
         else if (t.lender == currentUser.username)
           return <ExpenseCard data={t} lender={true} />;
         else return <ExpenseCard data={t} />;

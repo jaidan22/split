@@ -32,7 +32,7 @@ const Signup = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-200 flex flex-col justify-center py-12 sm:w-full sm:px-6 lg:px-8">
+    <div className="min-h-full absolute bg-gray-200 flex flex-col justify-center py-12 w-full sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-11/12	 sm:max-w-md">
         <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
           Sign Up
@@ -40,7 +40,7 @@ const Signup = () => {
       </div>
 
       <div className="mt-8 sm:mx-auto w-11/12 mx-auto	 sm:max-w-md">
-        <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+        <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10 rounded-2xl">
           <form className="space-y-6" action="#" method="POST">
             <div>
               <label
@@ -140,7 +140,7 @@ const Signup = () => {
               </div>
               <div className="relative flex justify-center">
                 <span className="px-2 text-base bg-white text-gray-500">
-                  Already have an account? <a href="/login">Login</a>
+                  Already have an account? <a href="/login" className="text-blue-700">Login</a>
                 </span>
               </div>
             </div>
